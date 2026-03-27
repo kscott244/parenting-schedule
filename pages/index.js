@@ -337,8 +337,28 @@ function DayCellFull({ day, iso, info, closure, onDelete }) {
   let labelContent;
 
   if (isClosed) {
-    shapeContent = <div style={{...styles.shapeFill, background: DC_COLOR, display:'flex', alignItems:'center', justifyContent:'center', fontSize:18}}>🚫</div>;
-    labelContent = <span style={{...styles.labelCenter, color:'#9a6800'}}>Closed</span>;
+    // Show original Mom/Dad colors with 🚫 overlaid on top
+    let baseShape;
+    if (!info.dropper) {
+      const color = info.owner === 'a' ? DAD_COLOR : MOM_COLOR;
+      baseShape = <div style={{...styles.shapeFill, background: color}} />;
+    } else {
+      const lc = info.dropper === 'a' ? DAD_COLOR : MOM_COLOR;
+      const rc = info.owner === 'a' ? DAD_COLOR : MOM_COLOR;
+      baseShape = (
+        <div style={{display:'flex', width:'100%', height:'100%'}}>
+          <div style={{flex:1, background: lc, borderRadius:'4px 0 0 4px'}} />
+          <div style={{flex:1, background: rc, borderRadius:'0 4px 4px 0'}} />
+        </div>
+      );
+    }
+    shapeContent = (
+      <div style={{position:'relative', width:'100%', height:'100%'}}>
+        {baseShape}
+        <div style={{position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, filter:'drop-shadow(0 0 2px rgba(0,0,0,0.3))'}}>🚫</div>
+      </div>
+    );
+    labelContent = <span style={{...styles.labelCenter, color:'#9a6800', fontSize:7}}>Closed</span>;
   } else if (isExc) {
     shapeContent = <div style={{...styles.shapeFill, background: EXC_COLOR, display:'flex', alignItems:'center', justifyContent:'center', fontSize:18}}>⚡</div>;
     labelContent = <span style={{...styles.labelCenter, color:'#6a00aa'}}>Exception</span>;
