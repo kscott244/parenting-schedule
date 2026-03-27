@@ -243,13 +243,15 @@ function buildSchedule() {
 // ── Storage helpers ────────────────────────────────────────────────────────
 async function loadClosures() {
   try {
-    const r = await window.storage.get('daycare-closures', true);
-    return r ? JSON.parse(r.value) : {};
+    const data = localStorage.getItem('daycare-closures');
+    return data ? JSON.parse(data) : {};
   } catch { return {}; }
 }
 
 async function saveClosures(obj) {
-  await window.storage.set('daycare-closures', JSON.stringify(obj), true);
+  try {
+    localStorage.setItem('daycare-closures', JSON.stringify(obj));
+  } catch(e) { console.error('Save failed:', e); }
 }
 
 // ── Modal ──────────────────────────────────────────────────────────────────
