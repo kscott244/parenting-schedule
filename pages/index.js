@@ -207,7 +207,7 @@ export default function Home() {
           <LegItemSplit left={DAD_COLOR} right={MOM_COLOR} label="Dad drops / Mom picks up" />
           <LegItemSplit left={MOM_COLOR} right={DAD_COLOR} label="Mom drops / Dad picks up" />
           <LegItemIcon color={EXC_COLOR} icon="⚡" label="Exception" />
-          <LegItemIcon color={DC_COLOR} icon="🚫" label="Daycare Closed" />
+          <LegItemIcon color={DC_COLOR} icon="✕" label="Daycare Closed" />
         </div>
 
         {/* Daycare button */}
@@ -355,7 +355,9 @@ function DayCellFull({ day, iso, info, closure, onDelete }) {
     shapeContent = (
       <div style={{position:'relative', width:'100%', height:'100%'}}>
         {baseShape}
-        <div style={{position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, filter:'drop-shadow(0 0 2px rgba(0,0,0,0.3))'}}>🚫</div>
+        <div style={{position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center'}}>
+          <div style={{background:'white', borderRadius:4, padding:'1px 5px', fontSize:8, fontWeight:'bold', color:'#333', boxShadow:'0 1px 3px rgba(0,0,0,0.4)', letterSpacing:0.3}}>CLOSED</div>
+        </div>
       </div>
     );
     labelContent = <span style={{...styles.labelCenter, color:'#9a6800', fontSize:7}}>Closed</span>;
