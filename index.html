@@ -254,12 +254,10 @@ async function saveClosures(obj) {
 
 // ── Modal ──────────────────────────────────────────────────────────────────
 function openModal() {
-  document.getElementById('pinInput').value = '';
-  document.getElementById('dcDate').value   = '';
-  document.getElementById('dcNote').value   = '';
-  document.getElementById('modalError').style.display = 'none';
+  document.getElementById('dcDate').value = '';
+  document.getElementById('dcNote').value = '';
   document.getElementById('modalOverlay').classList.add('open');
-  document.getElementById('pinInput').focus();
+  document.getElementById('dcDate').focus();
 }
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
